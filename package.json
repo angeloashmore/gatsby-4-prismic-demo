@@ -8,18 +8,41 @@
     "gatsby"
   ],
   "scripts": {
-    "develop": "gatsby develop",
+    "develop": "ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby develop",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "gen": "graphql-codegen",
+    "format": "prettier --write ."
   },
   "dependencies": {
-    "gatsby": "^3.13.0",
-    "gatsby-plugin-gatsby-cloud": "^3.1.0",
-    "gatsby-plugin-postcss": "^4.13.0",
+    "@fontsource/inter": "^4.5.0",
+    "@prismicio/react": "^2.0.0-alpha.4",
+    "clsx": "^1.1.1",
+    "gatsby": "^4.0.0-next.0",
+    "gatsby-plugin-gatsby-cloud": "^4.0.0-next.0",
+    "gatsby-plugin-image": "^2.0.0-zz-next.1",
+    "gatsby-plugin-postcss": "^5.0.0-next.0",
+    "gatsby-plugin-prismic-previews": "^5.0.0-next.4",
+    "gatsby-plugin-react-helmet-async": "^1.2.0",
+    "gatsby-source-prismic": "^5.0.0-next.4",
     "postcss": "^8.3.6",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-helmet-async": "^1.1.2",
+    "typescript": "^4.4.3"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.2.0",
+    "@graphql-codegen/typescript": "^2.2.2",
+    "@graphql-codegen/typescript-operations": "^2.1.4",
+    "@prismicio/helpers": "^2.0.0-alpha.8",
+    "@tailwindcss/aspect-ratio": "^0.2.1",
+    "@themosaad/tailwindcss-capsize": "^1.0.0",
+    "autoprefixer": "^10.3.4",
+    "dotenv": "^10.0.0",
+    "prettier": "^2.4.1",
+    "tailwindcss": "^2.2.15"
   }
 }
