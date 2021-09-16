@@ -5579,9 +5579,9 @@ gatsby-plugin-postcss@^5.0.0-next.0:
     postcss-loader "^4.3.0"
 
 gatsby-plugin-prismic-previews@^5.0.0-next.4:
-  version "5.0.0-next.4"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-prismic-previews/-/gatsby-plugin-prismic-previews-5.0.0-next.4.tgz#caf2aa745ef5508f25b6aeadc3d8e7322779fd91"
-  integrity sha512-ufosKdsKmS3CRfPmRetrXqTCE8XsH09e0gAV4XijV4y6GIHnAYo3O7RSWNRwqn9mpl1NZ+V5fDot7QpPKhy+4A==
+  version "5.0.0-next.5"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-prismic-previews/-/gatsby-plugin-prismic-previews-5.0.0-next.5.tgz#d2058d7c23965d01b535d02c9fa6197217988ecf"
+  integrity sha512-SY32789TcTblcFkEn1GCAKqvXnynBlF1R5JtXiF1+IHr/iWrYx2V+mQIH8LBjJ1w6jRRYPCrnUkQMxXYzLBAaA==
   dependencies:
     "@imgix/gatsby" "^1.6.11"
     "@prismicio/client" "^6.0.0-alpha.15"

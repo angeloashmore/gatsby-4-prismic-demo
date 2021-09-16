@@ -24,7 +24,7 @@
     "gatsby-plugin-gatsby-cloud": "^4.0.0-next.0",
     "gatsby-plugin-image": "^2.0.0-zz-next.1",
     "gatsby-plugin-postcss": "^5.0.0-next.0",
-    "gatsby-plugin-prismic-previews": "^5.0.0-next.4",
+    "gatsby-plugin-prismic-previews": "^5.0.0-next.5",
     "gatsby-plugin-react-helmet-async": "^1.2.0",
     "gatsby-source-prismic": "^5.0.0-next.4",
     "postcss": "^8.3.6",
