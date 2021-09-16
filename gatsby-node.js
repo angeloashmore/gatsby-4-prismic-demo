@@ -21,6 +21,7 @@ exports.createPages = async (gatsbyContext) => {
         path: page.url,
         component: path.resolve(__dirname, "src/templates/page.tsx"),
         context: { id: page.id },
+        defer: true,
       });
     }
   }

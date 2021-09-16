@@ -10,7 +10,7 @@ type PageDataBodyVideoProps = SliceComponentProps<PageDataBodyVideoFragment>;
 
 export const PageDataBodyVideo = ({ slice }: PageDataBodyVideoProps) => {
   return (
-    <section className="max-w-4xl px-6 py-8 mx-auto md:py-14">
+    <section className="max-w-4xl px-6 py-8 mx-auto md:py-14 w-full">
       <div className="justify-items-center grid gap-5 md:gap-8">
         {slice.primary.intro_text?.text && (
           <div className="text-center grid gap-5 md:gap-8 md:text-lg">

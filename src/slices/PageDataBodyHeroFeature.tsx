@@ -14,8 +14,8 @@ export const PageDataBodyHeroFeature = ({
   slice,
 }: PageDataBodyHeroFeatureProps) => {
   return (
-    <section className="max-w-6xl px-6 py-8 mx-auto md:py-14">
-      <div className="grid gap-5 md:grid-cols-12 md:gap-14 items-center">
+    <section className="max-w-6xl px-6 py-8 mx-auto md:py-14 w-full">
+      <div className="items-center grid gap-5 md:grid-cols-12 md:gap-14">
         <div className="justify-items-center md:justify-items-start grid gap-5 md:gap-8 md:col-span-6">
           {slice.primary.text?.text && (
             <div className="text-center text-gray-700 md:text-left md:text-lg">

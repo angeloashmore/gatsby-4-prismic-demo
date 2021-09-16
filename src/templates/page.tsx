@@ -2,6 +2,7 @@ import * as React from "react";
 import { graphql, PageProps } from "gatsby";
 import { Helmet } from "react-helmet-async";
 import { SliceZone } from "@prismicio/react";
+import { withPrismicPreview } from "gatsby-plugin-prismic-previews";
 
 import { PageTemplateQuery } from "../types.generated";
 import { sliceZoneComponents } from "../slices/PageDataBody";
@@ -10,9 +11,7 @@ import { Layout } from "../components/Layout";
 
 type PageTemplateProps = PageProps<PageTemplateQuery>;
 
-const PageTemplate = ({ data, ...props }: PageTemplateProps) => {
-  console.log({ data, props });
-
+const PageTemplate = ({ data }: PageTemplateProps) => {
   return (
     <Layout>
       <Helmet>
@@ -26,7 +25,7 @@ const PageTemplate = ({ data, ...props }: PageTemplateProps) => {
   );
 };
 
-export default PageTemplate;
+export default withPrismicPreview(PageTemplate);
 
 export const query = graphql`
   query PageTemplate($id: String!) {

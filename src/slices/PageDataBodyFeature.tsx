@@ -35,7 +35,7 @@ export const PageDataBodyFeature = ({ slice }: PageDataBodyFeatureProps) => {
     variants[(slice.primary.variant as keyof typeof variants) || "Purple"];
 
   return (
-    <section className="mx-auto px-6 py-8 max-w-4xl md:py-14">
+    <section className="mx-auto px-6 py-8 max-w-4xl md:py-14 w-full">
       <div className="justify-items-center grid gap-5 md:gap-8">
         {slice.primary.intro_text?.text && (
           <div className="text-center grid gap-5 md:gap-8 md:text-lg">

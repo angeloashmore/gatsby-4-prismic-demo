@@ -2507,6 +2507,7 @@ export type QuerySitePageArgs = {
   component?: Maybe<StringQueryOperatorInput>;
   componentChunkName?: Maybe<StringQueryOperatorInput>;
   context?: Maybe<SitePageContextFilterInput>;
+  defer?: Maybe<BooleanQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   internal?: Maybe<InternalFilterInput>;
   internalComponentName?: Maybe<StringQueryOperatorInput>;
@@ -3145,6 +3146,7 @@ export type SitePage = Node & {
   component: Scalars["String"];
   componentChunkName: Scalars["String"];
   context?: Maybe<SitePageContext>;
+  defer?: Maybe<Scalars["Boolean"]>;
   id: Scalars["ID"];
   internal: Internal;
   internalComponentName: Scalars["String"];
@@ -3248,6 +3250,7 @@ export enum SitePageFieldsEnum {
   Component = "component",
   ComponentChunkName = "componentChunkName",
   ContextId = "context___id",
+  Defer = "defer",
   Id = "id",
   InternalComponentName = "internalComponentName",
   InternalContent = "internal___content",
@@ -3391,6 +3394,7 @@ export type SitePageFilterInput = {
   component?: Maybe<StringQueryOperatorInput>;
   componentChunkName?: Maybe<StringQueryOperatorInput>;
   context?: Maybe<SitePageContextFilterInput>;
+  defer?: Maybe<BooleanQueryOperatorInput>;
   id?: Maybe<StringQueryOperatorInput>;
   internal?: Maybe<InternalFilterInput>;
   internalComponentName?: Maybe<StringQueryOperatorInput>;
@@ -4526,6 +4530,17 @@ export type GatsbyImgixFixed_NoBase64Fragment = {
   srcSet: string;
   srcWebp: string;
   srcSetWebp: string;
+};
+
+export type AllPagesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type AllPagesQuery = {
+  allPrismicPage: {
+    nodes: Array<{
+      url?: Maybe<string>;
+      data: { title?: Maybe<{ text?: Maybe<string> }> };
+    }>;
+  };
 };
 
 type SlicesPageDataBody_PrismicPageDataBodyFeature_Fragment = {

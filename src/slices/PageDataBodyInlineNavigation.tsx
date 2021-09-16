@@ -13,7 +13,7 @@ export const PageDataBodyInlineNavigation = ({
   slice,
 }: PageDataBodyInlineNavigationProps) => {
   return (
-    <section className="max-w-4xl px-6 py-8 mx-auto md:py-14">
+    <section className="max-w-4xl px-6 py-8 mx-auto md:py-14 w-full">
       <div className="justify-items-center grid gap-5 md:gap-8">
         <p className="text-gray-700 md:text-lg">
           {slice.primary.leading_text?.text && (
