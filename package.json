@@ -1,0 +1,25 @@
+{
+  "name": "gatsby-4-prismic-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gatsby 4 Prismic Demo",
+  "author": "Angelo Ashmore",
+  "keywords": [
+    "gatsby"
+  ],
+  "scripts": {
+    "develop": "gatsby develop",
+    "start": "gatsby develop",
+    "build": "gatsby build",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean"
+  },
+  "dependencies": {
+    "gatsby": "^3.13.0",
+    "gatsby-plugin-gatsby-cloud": "^3.1.0",
+    "gatsby-plugin-postcss": "^4.13.0",
+    "postcss": "^8.3.6",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
