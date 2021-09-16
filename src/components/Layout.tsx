@@ -8,11 +8,10 @@ export type LayoutProps = {
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <>
-      <Helmet>
+      <Helmet titleTemplate="%s | Gatsby" defaultTitle="Gatsby">
         <html lang="en" />
-        <title>Gatsby</title>
       </Helmet>
-      <main>{children}</main>
+      <main className="py-8 md:py-14">{children}</main>
     </>
   );
 };

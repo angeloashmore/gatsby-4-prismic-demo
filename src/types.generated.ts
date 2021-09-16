@@ -4540,7 +4540,15 @@ type SlicesPageDataBody_PrismicPageDataBodyFeature_Fragment = {
   };
 };
 
-type SlicesPageDataBody_PrismicPageDataBodyHeroFeature_Fragment = {};
+type SlicesPageDataBody_PrismicPageDataBodyHeroFeature_Fragment = {
+  slice_type: string;
+  primary: {
+    text?: Maybe<{ text?: Maybe<string>; richText?: Maybe<unknown> }>;
+    button_text?: Maybe<{ text?: Maybe<string> }>;
+    button_link?: Maybe<{ url?: Maybe<string>; target?: Maybe<string> }>;
+    image?: Maybe<{ gatsbyImageData?: Maybe<unknown>; alt?: Maybe<string> }>;
+  };
+};
 
 type SlicesPageDataBody_PrismicPageDataBodyInlineNavigation_Fragment = {
   slice_type: string;
@@ -4612,6 +4620,7 @@ export type PageTemplateQuery = {
   prismicPage?: Maybe<{
     _previewable: string;
     data: {
+      title?: Maybe<{ text?: Maybe<string> }>;
       body: Array<
         | {
             slice_type: string;
@@ -4638,6 +4647,21 @@ export type PageTemplateQuery = {
           }
         | {
             slice_type: string;
+            primary: {
+              text?: Maybe<{ text?: Maybe<string>; richText?: Maybe<unknown> }>;
+              button_text?: Maybe<{ text?: Maybe<string> }>;
+              button_link?: Maybe<{
+                url?: Maybe<string>;
+                target?: Maybe<string>;
+              }>;
+              image?: Maybe<{
+                gatsbyImageData?: Maybe<unknown>;
+                alt?: Maybe<string>;
+              }>;
+            };
+          }
+        | {
+            slice_type: string;
             primary: { leading_text?: Maybe<{ text?: Maybe<string> }> };
             items: Array<{
               link_label?: Maybe<{ text?: Maybe<string> }>;
@@ -4654,7 +4678,6 @@ export type PageTemplateQuery = {
               video_url?: Maybe<{ html?: Maybe<string> }>;
             };
           }
-        | {}
       >;
     };
   }>;
