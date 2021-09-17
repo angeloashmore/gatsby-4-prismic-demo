@@ -19,7 +19,6 @@
       "type": "Slices",
       "fieldset": "Slice zone",
       "config": {
-        "labels": null,
         "choices": {
           "hero_feature": {
             "type": "Slice",
@@ -39,8 +38,7 @@
               "button_link": {
                 "type": "Link",
                 "config": {
-                  "label": "Button Link",
-                  "select": null
+                  "label": "Button Link"
                 }
               },
               "button_text": {
@@ -88,8 +86,7 @@
                 "type": "Link",
                 "config": {
                   "allowTargetBlank": true,
-                  "label": "Link",
-                  "select": null
+                  "label": "Link"
                 }
               }
             }
@@ -169,8 +166,7 @@
                 "type": "Link",
                 "config": {
                   "allowTargetBlank": true,
-                  "label": "Button Link",
-                  "select": null
+                  "label": "Button Link"
                 }
               }
             },
