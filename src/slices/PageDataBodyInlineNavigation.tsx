@@ -6,8 +6,12 @@ import { PageDataBodyInlineNavigationFragment } from "../types.generated";
 
 import { Link } from "../components/Link";
 
+export type PageDataBodyInlineNavigationSlice = {
+  slice_type: "inline_navigation";
+} & PageDataBodyInlineNavigationFragment;
+
 type PageDataBodyInlineNavigationProps =
-  SliceComponentProps<PageDataBodyInlineNavigationFragment>;
+  SliceComponentProps<PageDataBodyInlineNavigationSlice>;
 
 export const PageDataBodyInlineNavigation = ({
   slice,

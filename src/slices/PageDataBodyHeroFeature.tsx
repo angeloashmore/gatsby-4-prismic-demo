@@ -7,8 +7,12 @@ import { PageDataBodyHeroFeatureFragment } from "../types.generated";
 
 import { ButtonLink } from "../components/ButtonLink";
 
+export type PageDataBodyHeroFeatureSlice = {
+  slice_type: "hero_feature";
+} & PageDataBodyHeroFeatureFragment;
+
 type PageDataBodyHeroFeatureProps =
-  SliceComponentProps<PageDataBodyHeroFeatureFragment>;
+  SliceComponentProps<PageDataBodyHeroFeatureSlice>;
 
 export const PageDataBodyHeroFeature = ({
   slice,

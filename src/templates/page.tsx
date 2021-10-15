@@ -5,7 +5,7 @@ import { SliceZone } from "@prismicio/react";
 import { withPrismicPreview } from "gatsby-plugin-prismic-previews";
 
 import { PageTemplateQuery } from "../types.generated";
-import { sliceZoneComponents } from "../slices/PageDataBody";
+import { sliceZoneComponents, PageDataBodySlice } from "../slices/PageDataBody";
 
 import { Layout } from "../components/Layout";
 
@@ -18,7 +18,7 @@ const PageTemplate = ({ data }: PageTemplateProps) => {
         <title>{data.prismicPage?.data?.title?.text}</title>
       </Helmet>
       <SliceZone
-        slices={data.prismicPage?.data.body}
+        slices={data.prismicPage?.data.body as PageDataBodySlice[]}
         components={sliceZoneComponents}
       />
     </Layout>

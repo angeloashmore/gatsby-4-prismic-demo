@@ -8,8 +8,11 @@ import { PageDataBodyFeatureFragment } from "../types.generated";
 
 import { ButtonLink } from "../components/ButtonLink";
 
-type PageDataBodyFeatureProps =
-  SliceComponentProps<PageDataBodyFeatureFragment>;
+export type PageDataBodyFeatureSlice = {
+  slice_type: "feature";
+} & PageDataBodyFeatureFragment;
+
+type PageDataBodyFeatureProps = SliceComponentProps<PageDataBodyFeatureSlice>;
 
 const variants = {
   Magenta: {

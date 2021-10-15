@@ -6,7 +6,11 @@ import { PageDataBodyVideoFragment } from "../types.generated";
 
 import { Link } from "../components/Link";
 
-type PageDataBodyVideoProps = SliceComponentProps<PageDataBodyVideoFragment>;
+export type PageDataBodyVideoSlice = {
+  slice_type: "video";
+} & PageDataBodyVideoFragment;
+
+type PageDataBodyVideoProps = SliceComponentProps<PageDataBodyVideoSlice>;
 
 export const PageDataBodyVideo = ({ slice }: PageDataBodyVideoProps) => {
   return (
