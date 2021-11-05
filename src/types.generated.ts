@@ -19,8 +19,6 @@ export type Scalars = {
   Date: string;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: unknown;
-  /** Text content with rich formatting capabilities using a Prismic format called Structured Text. */
-  PrismicStructuredText: import("@prismicio/types").RichTextField;
 };
 
 export type BooleanQueryOperatorInput = {
@@ -1623,7 +1621,7 @@ export type PrismicPage = Node & {
   _previewable: Scalars["ID"];
   alternate_languages: Array<PrismicAlternateLanguageType>;
   children: Array<Node>;
-  data: PrismicPageDataType;
+  data: Maybe<PrismicPageDataType>;
   dataRaw: Scalars["JSON"];
   first_publication_date: Scalars["Date"];
   href: Scalars["String"];
@@ -1689,7 +1687,7 @@ export type PrismicPageConnectionSumArgs = {
 
 export type PrismicPageDataBodyFeature = PrismicSliceType & {
   id: Scalars["ID"];
-  primary: PrismicPageDataBodyFeaturePrimary;
+  primary: Maybe<PrismicPageDataBodyFeaturePrimary>;
   slice_label: Maybe<Scalars["String"]>;
   slice_type: Scalars["String"];
 };
@@ -1757,7 +1755,7 @@ export type PrismicPageDataBodyFeaturePrimaryImageImageTypeUrlArgs = {
 
 export type PrismicPageDataBodyHeroFeature = PrismicSliceType & {
   id: Scalars["ID"];
-  primary: PrismicPageDataBodyHeroFeaturePrimary;
+  primary: Maybe<PrismicPageDataBodyHeroFeaturePrimary>;
   slice_label: Maybe<Scalars["String"]>;
   slice_type: Scalars["String"];
 };
@@ -1823,8 +1821,8 @@ export type PrismicPageDataBodyHeroFeaturePrimaryImageImageTypeUrlArgs = {
 
 export type PrismicPageDataBodyInlineNavigation = PrismicSliceType & {
   id: Scalars["ID"];
-  items: Array<PrismicPageDataBodyInlineNavigationItem>;
-  primary: PrismicPageDataBodyInlineNavigationPrimary;
+  items: Maybe<Array<Maybe<PrismicPageDataBodyInlineNavigationItem>>>;
+  primary: Maybe<PrismicPageDataBodyInlineNavigationPrimary>;
   slice_label: Maybe<Scalars["String"]>;
   slice_type: Scalars["String"];
 };
@@ -1846,7 +1844,7 @@ export type PrismicPageDataBodySlicesType =
 
 export type PrismicPageDataBodyVideo = PrismicSliceType & {
   id: Scalars["ID"];
-  primary: PrismicPageDataBodyVideoPrimary;
+  primary: Maybe<PrismicPageDataBodyVideoPrimary>;
   slice_label: Maybe<Scalars["String"]>;
   slice_type: Scalars["String"];
 };
@@ -1857,7 +1855,7 @@ export type PrismicPageDataBodyVideoPrimary = {
 };
 
 export type PrismicPageDataType = {
-  body: Array<PrismicPageDataBodySlicesType>;
+  body: Maybe<Array<Maybe<PrismicPageDataBodySlicesType>>>;
   title: Maybe<PrismicStructuredTextType>;
 };
 
@@ -1921,7 +1919,6 @@ export enum PrismicPageFieldsEnum {
   DataRaw = "dataRaw",
   DataTitleHtml = "data___title___html",
   DataTitleRaw = "data___title___raw",
-  DataTitleRichText = "data___title___richText",
   DataTitleText = "data___title___text",
   FirstPublicationDate = "first_publication_date",
   Href = "href",
@@ -2046,7 +2043,7 @@ export type PrismicProduct = Node & {
   _previewable: Scalars["ID"];
   alternate_languages: Array<PrismicAlternateLanguageType>;
   children: Array<Node>;
-  data: PrismicProductDataType;
+  data: Maybe<PrismicProductDataType>;
   dataRaw: Scalars["JSON"];
   first_publication_date: Scalars["Date"];
   href: Scalars["String"];
@@ -2175,7 +2172,6 @@ export enum PrismicProductFieldsEnum {
   DataRaw = "dataRaw",
   DataContentHtml = "data___content___html",
   DataContentRaw = "data___content___raw",
-  DataContentRichText = "data___content___richText",
   DataContentText = "data___content___text",
   DataStripeProductId = "data___stripe_product_id",
   FirstPublicationDate = "first_publication_date",
@@ -2295,39 +2291,21 @@ export type PrismicProductSortInput = {
   order: Maybe<Array<Maybe<SortOrderEnum>>>;
 };
 
-export type PrismicSharedSliceType = {
-  id: Scalars["ID"];
-  slice_label: Maybe<Scalars["String"]>;
-  slice_type: Scalars["String"];
-  variation: Scalars["String"];
-  version: Scalars["String"];
-};
-
 export type PrismicSliceType = {
   id: Scalars["ID"];
   slice_label: Maybe<Scalars["String"]>;
   slice_type: Scalars["String"];
 };
 
-export type PrismicStructuredTextQueryOperatorInput = {
-  eq: Maybe<Scalars["PrismicStructuredText"]>;
-  in: Maybe<Array<Maybe<Scalars["PrismicStructuredText"]>>>;
-  ne: Maybe<Scalars["PrismicStructuredText"]>;
-  nin: Maybe<Array<Maybe<Scalars["PrismicStructuredText"]>>>;
-};
-
 export type PrismicStructuredTextType = {
   html: Maybe<Scalars["String"]>;
-  /** @deprecated This field has been renamed to `richText`. The `richText` field has the same value the `raw` field. */
-  raw: Scalars["PrismicStructuredText"];
-  richText: Scalars["PrismicStructuredText"];
+  raw: Maybe<Scalars["JSON"]>;
   text: Maybe<Scalars["String"]>;
 };
 
 export type PrismicStructuredTextTypeFilterInput = {
   html: Maybe<StringQueryOperatorInput>;
-  raw: Maybe<PrismicStructuredTextQueryOperatorInput>;
-  richText: Maybe<PrismicStructuredTextQueryOperatorInput>;
+  raw: Maybe<JsonQueryOperatorInput>;
   text: Maybe<StringQueryOperatorInput>;
 };
 
@@ -2335,7 +2313,6 @@ export type PrismicTypePathType = Node & {
   children: Array<Node>;
   id: Scalars["ID"];
   internal: Internal;
-  kind: Scalars["String"];
   parent: Maybe<Node>;
   path: Array<Scalars["String"]>;
   type: Scalars["String"];
@@ -2430,7 +2407,6 @@ export enum PrismicTypePathTypeFieldsEnum {
   InternalMediaType = "internal___mediaType",
   InternalOwner = "internal___owner",
   InternalType = "internal___type",
-  Kind = "kind",
   ParentChildren = "parent___children",
   ParentChildrenChildren = "parent___children___children",
   ParentChildrenChildrenChildren = "parent___children___children___children",
@@ -2477,7 +2453,6 @@ export type PrismicTypePathTypeFilterInput = {
   children: Maybe<NodeFilterListInput>;
   id: Maybe<StringQueryOperatorInput>;
   internal: Maybe<InternalFilterInput>;
-  kind: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   path: Maybe<StringQueryOperatorInput>;
   type: Maybe<StringQueryOperatorInput>;
@@ -2767,7 +2742,6 @@ export type QueryPrismicTypePathTypeArgs = {
   children: Maybe<NodeFilterListInput>;
   id: Maybe<StringQueryOperatorInput>;
   internal: Maybe<InternalFilterInput>;
-  kind: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   path: Maybe<StringQueryOperatorInput>;
   type: Maybe<StringQueryOperatorInput>;
@@ -2779,7 +2753,6 @@ export type QuerySiteArgs = {
   host: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   internal: Maybe<InternalFilterInput>;
-  jsxRuntime: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
@@ -2813,14 +2786,16 @@ export type QuerySitePageArgs = {
   children: Maybe<NodeFilterListInput>;
   component: Maybe<StringQueryOperatorInput>;
   componentChunkName: Maybe<StringQueryOperatorInput>;
+  context: Maybe<SitePageContextFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
   internal: Maybe<InternalFilterInput>;
   internalComponentName: Maybe<StringQueryOperatorInput>;
+  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
   matchPath: Maybe<StringQueryOperatorInput>;
-  pageContext: Maybe<JsonQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   path: Maybe<StringQueryOperatorInput>;
   pluginCreator: Maybe<SitePluginFilterInput>;
+  pluginCreatorId: Maybe<StringQueryOperatorInput>;
 };
 
 export type QuerySitePluginArgs = {
@@ -2830,10 +2805,10 @@ export type QuerySitePluginArgs = {
   internal: Maybe<InternalFilterInput>;
   name: Maybe<StringQueryOperatorInput>;
   nodeAPIs: Maybe<StringQueryOperatorInput>;
-  packageJson: Maybe<JsonQueryOperatorInput>;
+  packageJson: Maybe<SitePluginPackageJsonFilterInput>;
   parent: Maybe<NodeFilterInput>;
   pluginFilepath: Maybe<StringQueryOperatorInput>;
-  pluginOptions: Maybe<JsonQueryOperatorInput>;
+  pluginOptions: Maybe<SitePluginPluginOptionsFilterInput>;
   resolve: Maybe<StringQueryOperatorInput>;
   ssrAPIs: Maybe<StringQueryOperatorInput>;
   version: Maybe<StringQueryOperatorInput>;
@@ -2845,7 +2820,6 @@ export type Site = Node & {
   host: Maybe<Scalars["String"]>;
   id: Scalars["ID"];
   internal: Internal;
-  jsxRuntime: Maybe<Scalars["String"]>;
   parent: Maybe<Node>;
   pathPrefix: Maybe<Scalars["String"]>;
   polyfill: Maybe<Scalars["Boolean"]>;
@@ -3145,7 +3119,6 @@ export enum SiteFieldsEnum {
   InternalMediaType = "internal___mediaType",
   InternalOwner = "internal___owner",
   InternalType = "internal___type",
-  JsxRuntime = "jsxRuntime",
   ParentChildren = "parent___children",
   ParentChildrenChildren = "parent___children___children",
   ParentChildrenChildrenChildren = "parent___children___children___children",
@@ -3198,7 +3171,6 @@ export type SiteFilterInput = {
   host: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
   internal: Maybe<InternalFilterInput>;
-  jsxRuntime: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
@@ -3451,14 +3423,16 @@ export type SitePage = Node & {
   children: Array<Node>;
   component: Scalars["String"];
   componentChunkName: Scalars["String"];
+  context: Maybe<SitePageContext>;
   id: Scalars["ID"];
   internal: Internal;
   internalComponentName: Scalars["String"];
+  isCreatedByStatefulCreatePages: Maybe<Scalars["Boolean"]>;
   matchPath: Maybe<Scalars["String"]>;
-  pageContext: Maybe<Scalars["JSON"]>;
   parent: Maybe<Node>;
   path: Scalars["String"];
   pluginCreator: Maybe<SitePlugin>;
+  pluginCreatorId: Maybe<Scalars["String"]>;
 };
 
 export type SitePageConnection = {
@@ -3493,6 +3467,14 @@ export type SitePageConnectionMinArgs = {
 
 export type SitePageConnectionSumArgs = {
   field: SitePageFieldsEnum;
+};
+
+export type SitePageContext = {
+  id: Maybe<Scalars["String"]>;
+};
+
+export type SitePageContextFilterInput = {
+  id: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageEdge = {
@@ -3543,6 +3525,7 @@ export enum SitePageFieldsEnum {
   ChildrenParentParentId = "children___parent___parent___id",
   Component = "component",
   ComponentChunkName = "componentChunkName",
+  ContextId = "context___id",
   Id = "id",
   InternalComponentName = "internalComponentName",
   InternalContent = "internal___content",
@@ -3553,8 +3536,8 @@ export enum SitePageFieldsEnum {
   InternalMediaType = "internal___mediaType",
   InternalOwner = "internal___owner",
   InternalType = "internal___type",
+  IsCreatedByStatefulCreatePages = "isCreatedByStatefulCreatePages",
   MatchPath = "matchPath",
-  PageContext = "pageContext",
   ParentChildren = "parent___children",
   ParentChildrenChildren = "parent___children___children",
   ParentChildrenChildrenChildren = "parent___children___children___children",
@@ -3594,6 +3577,7 @@ export enum SitePageFieldsEnum {
   ParentParentParentChildren = "parent___parent___parent___children",
   ParentParentParentId = "parent___parent___parent___id",
   Path = "path",
+  PluginCreatorId = "pluginCreatorId",
   PluginCreatorBrowserApIs = "pluginCreator___browserAPIs",
   PluginCreatorChildren = "pluginCreator___children",
   PluginCreatorChildrenChildren = "pluginCreator___children___children",
@@ -3621,7 +3605,22 @@ export enum SitePageFieldsEnum {
   PluginCreatorInternalType = "pluginCreator___internal___type",
   PluginCreatorName = "pluginCreator___name",
   PluginCreatorNodeApIs = "pluginCreator___nodeAPIs",
-  PluginCreatorPackageJson = "pluginCreator___packageJson",
+  PluginCreatorPackageJsonAuthor = "pluginCreator___packageJson___author",
+  PluginCreatorPackageJsonDependencies = "pluginCreator___packageJson___dependencies",
+  PluginCreatorPackageJsonDependenciesName = "pluginCreator___packageJson___dependencies___name",
+  PluginCreatorPackageJsonDependenciesVersion = "pluginCreator___packageJson___dependencies___version",
+  PluginCreatorPackageJsonDescription = "pluginCreator___packageJson___description",
+  PluginCreatorPackageJsonDevDependencies = "pluginCreator___packageJson___devDependencies",
+  PluginCreatorPackageJsonDevDependenciesName = "pluginCreator___packageJson___devDependencies___name",
+  PluginCreatorPackageJsonDevDependenciesVersion = "pluginCreator___packageJson___devDependencies___version",
+  PluginCreatorPackageJsonKeywords = "pluginCreator___packageJson___keywords",
+  PluginCreatorPackageJsonLicense = "pluginCreator___packageJson___license",
+  PluginCreatorPackageJsonMain = "pluginCreator___packageJson___main",
+  PluginCreatorPackageJsonName = "pluginCreator___packageJson___name",
+  PluginCreatorPackageJsonPeerDependencies = "pluginCreator___packageJson___peerDependencies",
+  PluginCreatorPackageJsonPeerDependenciesName = "pluginCreator___packageJson___peerDependencies___name",
+  PluginCreatorPackageJsonPeerDependenciesVersion = "pluginCreator___packageJson___peerDependencies___version",
+  PluginCreatorPackageJsonVersion = "pluginCreator___packageJson___version",
   PluginCreatorParentChildren = "pluginCreator___parent___children",
   PluginCreatorParentChildrenChildren = "pluginCreator___parent___children___children",
   PluginCreatorParentChildrenId = "pluginCreator___parent___children___id",
@@ -3637,7 +3636,24 @@ export enum SitePageFieldsEnum {
   PluginCreatorParentParentChildren = "pluginCreator___parent___parent___children",
   PluginCreatorParentParentId = "pluginCreator___parent___parent___id",
   PluginCreatorPluginFilepath = "pluginCreator___pluginFilepath",
-  PluginCreatorPluginOptions = "pluginCreator___pluginOptions",
+  PluginCreatorPluginOptionsAccessToken = "pluginCreator___pluginOptions___accessToken",
+  PluginCreatorPluginOptionsAllExtensions = "pluginCreator___pluginOptions___allExtensions",
+  PluginCreatorPluginOptionsApiEndpoint = "pluginCreator___pluginOptions___apiEndpoint",
+  PluginCreatorPluginOptionsCustomTypesApiToken = "pluginCreator___pluginOptions___customTypesApiToken",
+  PluginCreatorPluginOptionsImageImgixParamsAuto = "pluginCreator___pluginOptions___imageImgixParams___auto",
+  PluginCreatorPluginOptionsImageImgixParamsFit = "pluginCreator___pluginOptions___imageImgixParams___fit",
+  PluginCreatorPluginOptionsImageImgixParamsQ = "pluginCreator___pluginOptions___imageImgixParams___q",
+  PluginCreatorPluginOptionsImagePlaceholderImgixParamsBlur = "pluginCreator___pluginOptions___imagePlaceholderImgixParams___blur",
+  PluginCreatorPluginOptionsImagePlaceholderImgixParamsW = "pluginCreator___pluginOptions___imagePlaceholderImgixParams___w",
+  PluginCreatorPluginOptionsIsTsx = "pluginCreator___pluginOptions___isTSX",
+  PluginCreatorPluginOptionsJsxPragma = "pluginCreator___pluginOptions___jsxPragma",
+  PluginCreatorPluginOptionsLang = "pluginCreator___pluginOptions___lang",
+  PluginCreatorPluginOptionsPageSize = "pluginCreator___pluginOptions___pageSize",
+  PluginCreatorPluginOptionsPath = "pluginCreator___pluginOptions___path",
+  PluginCreatorPluginOptionsPathCheck = "pluginCreator___pluginOptions___pathCheck",
+  PluginCreatorPluginOptionsPromptForAccessToken = "pluginCreator___pluginOptions___promptForAccessToken",
+  PluginCreatorPluginOptionsRepositoryName = "pluginCreator___pluginOptions___repositoryName",
+  PluginCreatorPluginOptionsToolbar = "pluginCreator___pluginOptions___toolbar",
   PluginCreatorResolve = "pluginCreator___resolve",
   PluginCreatorSsrApIs = "pluginCreator___ssrAPIs",
   PluginCreatorVersion = "pluginCreator___version",
@@ -3647,14 +3663,16 @@ export type SitePageFilterInput = {
   children: Maybe<NodeFilterListInput>;
   component: Maybe<StringQueryOperatorInput>;
   componentChunkName: Maybe<StringQueryOperatorInput>;
+  context: Maybe<SitePageContextFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
   internal: Maybe<InternalFilterInput>;
   internalComponentName: Maybe<StringQueryOperatorInput>;
+  isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
   matchPath: Maybe<StringQueryOperatorInput>;
-  pageContext: Maybe<JsonQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   path: Maybe<StringQueryOperatorInput>;
   pluginCreator: Maybe<SitePluginFilterInput>;
+  pluginCreatorId: Maybe<StringQueryOperatorInput>;
 };
 
 export type SitePageGroupConnection = {
@@ -3705,10 +3723,10 @@ export type SitePlugin = Node & {
   internal: Internal;
   name: Maybe<Scalars["String"]>;
   nodeAPIs: Maybe<Array<Maybe<Scalars["String"]>>>;
-  packageJson: Maybe<Scalars["JSON"]>;
+  packageJson: Maybe<SitePluginPackageJson>;
   parent: Maybe<Node>;
   pluginFilepath: Maybe<Scalars["String"]>;
-  pluginOptions: Maybe<Scalars["JSON"]>;
+  pluginOptions: Maybe<SitePluginPluginOptions>;
   resolve: Maybe<Scalars["String"]>;
   ssrAPIs: Maybe<Array<Maybe<Scalars["String"]>>>;
   version: Maybe<Scalars["String"]>;
@@ -3806,7 +3824,22 @@ export enum SitePluginFieldsEnum {
   InternalType = "internal___type",
   Name = "name",
   NodeApIs = "nodeAPIs",
-  PackageJson = "packageJson",
+  PackageJsonAuthor = "packageJson___author",
+  PackageJsonDependencies = "packageJson___dependencies",
+  PackageJsonDependenciesName = "packageJson___dependencies___name",
+  PackageJsonDependenciesVersion = "packageJson___dependencies___version",
+  PackageJsonDescription = "packageJson___description",
+  PackageJsonDevDependencies = "packageJson___devDependencies",
+  PackageJsonDevDependenciesName = "packageJson___devDependencies___name",
+  PackageJsonDevDependenciesVersion = "packageJson___devDependencies___version",
+  PackageJsonKeywords = "packageJson___keywords",
+  PackageJsonLicense = "packageJson___license",
+  PackageJsonMain = "packageJson___main",
+  PackageJsonName = "packageJson___name",
+  PackageJsonPeerDependencies = "packageJson___peerDependencies",
+  PackageJsonPeerDependenciesName = "packageJson___peerDependencies___name",
+  PackageJsonPeerDependenciesVersion = "packageJson___peerDependencies___version",
+  PackageJsonVersion = "packageJson___version",
   ParentChildren = "parent___children",
   ParentChildrenChildren = "parent___children___children",
   ParentChildrenChildrenChildren = "parent___children___children___children",
@@ -3846,7 +3879,24 @@ export enum SitePluginFieldsEnum {
   ParentParentParentChildren = "parent___parent___parent___children",
   ParentParentParentId = "parent___parent___parent___id",
   PluginFilepath = "pluginFilepath",
-  PluginOptions = "pluginOptions",
+  PluginOptionsAccessToken = "pluginOptions___accessToken",
+  PluginOptionsAllExtensions = "pluginOptions___allExtensions",
+  PluginOptionsApiEndpoint = "pluginOptions___apiEndpoint",
+  PluginOptionsCustomTypesApiToken = "pluginOptions___customTypesApiToken",
+  PluginOptionsImageImgixParamsAuto = "pluginOptions___imageImgixParams___auto",
+  PluginOptionsImageImgixParamsFit = "pluginOptions___imageImgixParams___fit",
+  PluginOptionsImageImgixParamsQ = "pluginOptions___imageImgixParams___q",
+  PluginOptionsImagePlaceholderImgixParamsBlur = "pluginOptions___imagePlaceholderImgixParams___blur",
+  PluginOptionsImagePlaceholderImgixParamsW = "pluginOptions___imagePlaceholderImgixParams___w",
+  PluginOptionsIsTsx = "pluginOptions___isTSX",
+  PluginOptionsJsxPragma = "pluginOptions___jsxPragma",
+  PluginOptionsLang = "pluginOptions___lang",
+  PluginOptionsPageSize = "pluginOptions___pageSize",
+  PluginOptionsPath = "pluginOptions___path",
+  PluginOptionsPathCheck = "pluginOptions___pathCheck",
+  PluginOptionsPromptForAccessToken = "pluginOptions___promptForAccessToken",
+  PluginOptionsRepositoryName = "pluginOptions___repositoryName",
+  PluginOptionsToolbar = "pluginOptions___toolbar",
   Resolve = "resolve",
   SsrApIs = "ssrAPIs",
   Version = "version",
@@ -3859,10 +3909,10 @@ export type SitePluginFilterInput = {
   internal: Maybe<InternalFilterInput>;
   name: Maybe<StringQueryOperatorInput>;
   nodeAPIs: Maybe<StringQueryOperatorInput>;
-  packageJson: Maybe<JsonQueryOperatorInput>;
+  packageJson: Maybe<SitePluginPackageJsonFilterInput>;
   parent: Maybe<NodeFilterInput>;
   pluginFilepath: Maybe<StringQueryOperatorInput>;
-  pluginOptions: Maybe<JsonQueryOperatorInput>;
+  pluginOptions: Maybe<SitePluginPluginOptionsFilterInput>;
   resolve: Maybe<StringQueryOperatorInput>;
   ssrAPIs: Maybe<StringQueryOperatorInput>;
   version: Maybe<StringQueryOperatorInput>;
@@ -3903,6 +3953,820 @@ export type SitePluginGroupConnectionMinArgs = {
 export type SitePluginGroupConnectionSumArgs = {
   field: SitePluginFieldsEnum;
 };
+
+export type SitePluginPackageJson = {
+  author: Maybe<Scalars["String"]>;
+  dependencies: Maybe<Array<Maybe<SitePluginPackageJsonDependencies>>>;
+  description: Maybe<Scalars["String"]>;
+  devDependencies: Maybe<Array<Maybe<SitePluginPackageJsonDevDependencies>>>;
+  keywords: Maybe<Array<Maybe<Scalars["String"]>>>;
+  license: Maybe<Scalars["String"]>;
+  main: Maybe<Scalars["String"]>;
+  name: Maybe<Scalars["String"]>;
+  peerDependencies: Maybe<Array<Maybe<SitePluginPackageJsonPeerDependencies>>>;
+  version: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPackageJsonDependencies = {
+  name: Maybe<Scalars["String"]>;
+  version: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPackageJsonDependenciesFilterInput = {
+  name: Maybe<StringQueryOperatorInput>;
+  version: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPackageJsonDependenciesFilterListInput = {
+  elemMatch: Maybe<SitePluginPackageJsonDependenciesFilterInput>;
+};
+
+export type SitePluginPackageJsonDevDependencies = {
+  name: Maybe<Scalars["String"]>;
+  version: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPackageJsonDevDependenciesFilterInput = {
+  name: Maybe<StringQueryOperatorInput>;
+  version: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPackageJsonDevDependenciesFilterListInput = {
+  elemMatch: Maybe<SitePluginPackageJsonDevDependenciesFilterInput>;
+};
+
+export type SitePluginPackageJsonFilterInput = {
+  author: Maybe<StringQueryOperatorInput>;
+  dependencies: Maybe<SitePluginPackageJsonDependenciesFilterListInput>;
+  description: Maybe<StringQueryOperatorInput>;
+  devDependencies: Maybe<SitePluginPackageJsonDevDependenciesFilterListInput>;
+  keywords: Maybe<StringQueryOperatorInput>;
+  license: Maybe<StringQueryOperatorInput>;
+  main: Maybe<StringQueryOperatorInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  peerDependencies: Maybe<SitePluginPackageJsonPeerDependenciesFilterListInput>;
+  version: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPackageJsonPeerDependencies = {
+  name: Maybe<Scalars["String"]>;
+  version: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPackageJsonPeerDependenciesFilterInput = {
+  name: Maybe<StringQueryOperatorInput>;
+  version: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPackageJsonPeerDependenciesFilterListInput = {
+  elemMatch: Maybe<SitePluginPackageJsonPeerDependenciesFilterInput>;
+};
+
+export type SitePluginPluginOptions = {
+  accessToken: Maybe<Scalars["String"]>;
+  allExtensions: Maybe<Scalars["Boolean"]>;
+  apiEndpoint: Maybe<Scalars["String"]>;
+  customTypesApiToken: Maybe<Scalars["String"]>;
+  imageImgixParams: Maybe<SitePluginPluginOptionsImageImgixParams>;
+  imagePlaceholderImgixParams: Maybe<SitePluginPluginOptionsImagePlaceholderImgixParams>;
+  isTSX: Maybe<Scalars["Boolean"]>;
+  jsxPragma: Maybe<Scalars["String"]>;
+  lang: Maybe<Scalars["String"]>;
+  pageSize: Maybe<Scalars["Int"]>;
+  path: Maybe<Scalars["String"]>;
+  pathCheck: Maybe<Scalars["Boolean"]>;
+  promptForAccessToken: Maybe<Scalars["Boolean"]>;
+  repositoryName: Maybe<Scalars["String"]>;
+  schemas: Maybe<SitePluginPluginOptionsSchemas>;
+  toolbar: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsFilterInput = {
+  accessToken: Maybe<StringQueryOperatorInput>;
+  allExtensions: Maybe<BooleanQueryOperatorInput>;
+  apiEndpoint: Maybe<StringQueryOperatorInput>;
+  customTypesApiToken: Maybe<StringQueryOperatorInput>;
+  imageImgixParams: Maybe<SitePluginPluginOptionsImageImgixParamsFilterInput>;
+  imagePlaceholderImgixParams: Maybe<SitePluginPluginOptionsImagePlaceholderImgixParamsFilterInput>;
+  isTSX: Maybe<BooleanQueryOperatorInput>;
+  jsxPragma: Maybe<StringQueryOperatorInput>;
+  lang: Maybe<StringQueryOperatorInput>;
+  pageSize: Maybe<IntQueryOperatorInput>;
+  path: Maybe<StringQueryOperatorInput>;
+  pathCheck: Maybe<BooleanQueryOperatorInput>;
+  promptForAccessToken: Maybe<BooleanQueryOperatorInput>;
+  repositoryName: Maybe<StringQueryOperatorInput>;
+  schemas: Maybe<SitePluginPluginOptionsSchemasFilterInput>;
+  toolbar: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsImageImgixParams = {
+  auto: Maybe<Scalars["String"]>;
+  fit: Maybe<Scalars["String"]>;
+  q: Maybe<Scalars["Int"]>;
+};
+
+export type SitePluginPluginOptionsImageImgixParamsFilterInput = {
+  auto: Maybe<StringQueryOperatorInput>;
+  fit: Maybe<StringQueryOperatorInput>;
+  q: Maybe<IntQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsImagePlaceholderImgixParams = {
+  blur: Maybe<Scalars["Int"]>;
+  w: Maybe<Scalars["Int"]>;
+};
+
+export type SitePluginPluginOptionsImagePlaceholderImgixParamsFilterInput = {
+  blur: Maybe<IntQueryOperatorInput>;
+  w: Maybe<IntQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemas = {
+  page: Maybe<SitePluginPluginOptionsSchemasPage>;
+  product: Maybe<SitePluginPluginOptionsSchemasProduct>;
+};
+
+export type SitePluginPluginOptionsSchemasFilterInput = {
+  page: Maybe<SitePluginPluginOptionsSchemasPageFilterInput>;
+  product: Maybe<SitePluginPluginOptionsSchemasProductFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPage = {
+  Body: Maybe<SitePluginPluginOptionsSchemasPageBody>;
+  Main: Maybe<SitePluginPluginOptionsSchemasPageMain>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBody = {
+  body: Maybe<SitePluginPluginOptionsSchemasPageBodyBody>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBody = {
+  config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfig>;
+  fieldset: Maybe<Scalars["String"]>;
+  type: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfig = {
+  choices: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoices>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoices = {
+  feature: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeature>;
+  hero_feature: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_Feature>;
+  inline_navigation: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_Navigation>;
+  video: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideo>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeature = {
+  description: Maybe<Scalars["String"]>;
+  display: Maybe<Scalars["String"]>;
+  fieldset: Maybe<Scalars["String"]>;
+  icon: Maybe<Scalars["String"]>;
+  non_repeat: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_Repeat>;
+  type: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureFilterInput =
+  {
+    description: Maybe<StringQueryOperatorInput>;
+    display: Maybe<StringQueryOperatorInput>;
+    fieldset: Maybe<StringQueryOperatorInput>;
+    icon: Maybe<StringQueryOperatorInput>;
+    non_repeat: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_Repeat =
+  {
+    button_link: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_Link>;
+    button_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_Text>;
+    detail_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatDetail_Text>;
+    image: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatImage>;
+    intro_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatIntro_Text>;
+    variant: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatVariant>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_Link =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_LinkConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_LinkConfig =
+  {
+    allowTargetBlank: Maybe<Scalars["Boolean"]>;
+    label: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_LinkConfigFilterInput =
+  {
+    allowTargetBlank: Maybe<BooleanQueryOperatorInput>;
+    label: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_LinkFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_LinkConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_Text =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_TextConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_TextConfig =
+  {
+    label: Maybe<Scalars["String"]>;
+    single: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_TextConfigFilterInput =
+  {
+    label: Maybe<StringQueryOperatorInput>;
+    single: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_TextFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_TextConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatDetail_Text =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatDetail_TextConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatDetail_TextConfig =
+  {
+    allowTargetBlank: Maybe<Scalars["Boolean"]>;
+    label: Maybe<Scalars["String"]>;
+    multi: Maybe<Scalars["String"]>;
+    placeholder: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatDetail_TextConfigFilterInput =
+  {
+    allowTargetBlank: Maybe<BooleanQueryOperatorInput>;
+    label: Maybe<StringQueryOperatorInput>;
+    multi: Maybe<StringQueryOperatorInput>;
+    placeholder: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatDetail_TextFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatDetail_TextConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatFilterInput =
+  {
+    button_link: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_LinkFilterInput>;
+    button_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatButton_TextFilterInput>;
+    detail_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatDetail_TextFilterInput>;
+    image: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatImageFilterInput>;
+    intro_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatIntro_TextFilterInput>;
+    variant: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatVariantFilterInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatImage =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatImageConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatImageConfig =
+  {
+    label: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatImageConfigFilterInput =
+  {
+    label: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatImageFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatImageConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatIntro_Text =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatIntro_TextConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatIntro_TextConfig =
+  {
+    allowTargetBlank: Maybe<Scalars["Boolean"]>;
+    label: Maybe<Scalars["String"]>;
+    multi: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatIntro_TextConfigFilterInput =
+  {
+    allowTargetBlank: Maybe<BooleanQueryOperatorInput>;
+    label: Maybe<StringQueryOperatorInput>;
+    multi: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatIntro_TextFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatIntro_TextConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatVariant =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatVariantConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatVariantConfig =
+  {
+    default_value: Maybe<Scalars["String"]>;
+    label: Maybe<Scalars["String"]>;
+    options: Maybe<Array<Maybe<Scalars["String"]>>>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatVariantConfigFilterInput =
+  {
+    default_value: Maybe<StringQueryOperatorInput>;
+    label: Maybe<StringQueryOperatorInput>;
+    options: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatVariantFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureNon_RepeatVariantConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFilterInput =
+  {
+    feature: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFeatureFilterInput>;
+    hero_feature: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureFilterInput>;
+    inline_navigation: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationFilterInput>;
+    video: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoFilterInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_Feature =
+  {
+    description: Maybe<Scalars["String"]>;
+    display: Maybe<Scalars["String"]>;
+    fieldset: Maybe<Scalars["String"]>;
+    icon: Maybe<Scalars["String"]>;
+    non_repeat: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_Repeat>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureFilterInput =
+  {
+    description: Maybe<StringQueryOperatorInput>;
+    display: Maybe<StringQueryOperatorInput>;
+    fieldset: Maybe<StringQueryOperatorInput>;
+    icon: Maybe<StringQueryOperatorInput>;
+    non_repeat: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_Repeat =
+  {
+    button_link: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_Link>;
+    button_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_Text>;
+    image: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatImage>;
+    text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatText>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_Link =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_LinkConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_LinkConfig =
+  {
+    allowTargetBlank: Maybe<Scalars["Boolean"]>;
+    label: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_LinkConfigFilterInput =
+  {
+    allowTargetBlank: Maybe<BooleanQueryOperatorInput>;
+    label: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_LinkFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_LinkConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_Text =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_TextConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_TextConfig =
+  {
+    label: Maybe<Scalars["String"]>;
+    single: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_TextConfigFilterInput =
+  {
+    label: Maybe<StringQueryOperatorInput>;
+    single: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_TextFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_TextConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatFilterInput =
+  {
+    button_link: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_LinkFilterInput>;
+    button_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatButton_TextFilterInput>;
+    image: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatImageFilterInput>;
+    text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatTextFilterInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatImage =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatImageConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatImageConfig =
+  {
+    label: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatImageConfigFilterInput =
+  {
+    label: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatImageFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatImageConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatText =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatTextConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatTextConfig =
+  {
+    allowTargetBlank: Maybe<Scalars["Boolean"]>;
+    label: Maybe<Scalars["String"]>;
+    multi: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatTextConfigFilterInput =
+  {
+    allowTargetBlank: Maybe<BooleanQueryOperatorInput>;
+    label: Maybe<StringQueryOperatorInput>;
+    multi: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatTextFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesHero_FeatureNon_RepeatTextConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_Navigation =
+  {
+    description: Maybe<Scalars["String"]>;
+    display: Maybe<Scalars["String"]>;
+    fieldset: Maybe<Scalars["String"]>;
+    icon: Maybe<Scalars["String"]>;
+    non_repeat: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_Repeat>;
+    repeat: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeat>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationFilterInput =
+  {
+    description: Maybe<StringQueryOperatorInput>;
+    display: Maybe<StringQueryOperatorInput>;
+    fieldset: Maybe<StringQueryOperatorInput>;
+    icon: Maybe<StringQueryOperatorInput>;
+    non_repeat: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_RepeatFilterInput>;
+    repeat: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_Repeat =
+  {
+    leading_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_RepeatLeading_Text>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_RepeatFilterInput =
+  {
+    leading_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_RepeatLeading_TextFilterInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_RepeatLeading_Text =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_RepeatLeading_TextConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_RepeatLeading_TextConfig =
+  {
+    label: Maybe<Scalars["String"]>;
+    single: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_RepeatLeading_TextConfigFilterInput =
+  {
+    label: Maybe<StringQueryOperatorInput>;
+    single: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_RepeatLeading_TextFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationNon_RepeatLeading_TextConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeat =
+  {
+    link: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLink>;
+    link_label: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLink_Label>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatFilterInput =
+  {
+    link: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLinkFilterInput>;
+    link_label: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLink_LabelFilterInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLink =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLinkConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLinkConfig =
+  {
+    allowTargetBlank: Maybe<Scalars["Boolean"]>;
+    label: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLinkConfigFilterInput =
+  {
+    allowTargetBlank: Maybe<BooleanQueryOperatorInput>;
+    label: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLinkFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLinkConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLink_Label =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLink_LabelConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLink_LabelConfig =
+  {
+    label: Maybe<Scalars["String"]>;
+    single: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLink_LabelConfigFilterInput =
+  {
+    label: Maybe<StringQueryOperatorInput>;
+    single: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLink_LabelFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesInline_NavigationRepeatLink_LabelConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideo = {
+  description: Maybe<Scalars["String"]>;
+  display: Maybe<Scalars["String"]>;
+  fieldset: Maybe<Scalars["String"]>;
+  icon: Maybe<Scalars["String"]>;
+  non_repeat: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_Repeat>;
+  type: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoFilterInput =
+  {
+    description: Maybe<StringQueryOperatorInput>;
+    display: Maybe<StringQueryOperatorInput>;
+    fieldset: Maybe<StringQueryOperatorInput>;
+    icon: Maybe<StringQueryOperatorInput>;
+    non_repeat: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_Repeat =
+  {
+    intro_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatIntro_Text>;
+    video_url: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatVideo_Url>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatFilterInput =
+  {
+    intro_text: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatIntro_TextFilterInput>;
+    video_url: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatVideo_UrlFilterInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatIntro_Text =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatIntro_TextConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatIntro_TextConfig =
+  {
+    allowTargetBlank: Maybe<Scalars["Boolean"]>;
+    label: Maybe<Scalars["String"]>;
+    multi: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatIntro_TextConfigFilterInput =
+  {
+    allowTargetBlank: Maybe<BooleanQueryOperatorInput>;
+    label: Maybe<StringQueryOperatorInput>;
+    multi: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatIntro_TextFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatIntro_TextConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatVideo_Url =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatVideo_UrlConfig>;
+    type: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatVideo_UrlConfig =
+  {
+    label: Maybe<Scalars["String"]>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatVideo_UrlConfigFilterInput =
+  {
+    label: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatVideo_UrlFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesVideoNon_RepeatVideo_UrlConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyConfigFilterInput = {
+  choices: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigChoicesFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyBodyFilterInput = {
+  config: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyConfigFilterInput>;
+  fieldset: Maybe<StringQueryOperatorInput>;
+  type: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageBodyFilterInput = {
+  body: Maybe<SitePluginPluginOptionsSchemasPageBodyBodyFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageFilterInput = {
+  Body: Maybe<SitePluginPluginOptionsSchemasPageBodyFilterInput>;
+  Main: Maybe<SitePluginPluginOptionsSchemasPageMainFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageMain = {
+  title: Maybe<SitePluginPluginOptionsSchemasPageMainTitle>;
+  uid: Maybe<SitePluginPluginOptionsSchemasPageMainUid>;
+};
+
+export type SitePluginPluginOptionsSchemasPageMainFilterInput = {
+  title: Maybe<SitePluginPluginOptionsSchemasPageMainTitleFilterInput>;
+  uid: Maybe<SitePluginPluginOptionsSchemasPageMainUidFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageMainTitle = {
+  config: Maybe<SitePluginPluginOptionsSchemasPageMainTitleConfig>;
+  type: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasPageMainTitleConfig = {
+  label: Maybe<Scalars["String"]>;
+  single: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasPageMainTitleConfigFilterInput = {
+  label: Maybe<StringQueryOperatorInput>;
+  single: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageMainTitleFilterInput = {
+  config: Maybe<SitePluginPluginOptionsSchemasPageMainTitleConfigFilterInput>;
+  type: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageMainUid = {
+  config: Maybe<SitePluginPluginOptionsSchemasPageMainUidConfig>;
+  type: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasPageMainUidConfig = {
+  label: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasPageMainUidConfigFilterInput = {
+  label: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasPageMainUidFilterInput = {
+  config: Maybe<SitePluginPluginOptionsSchemasPageMainUidConfigFilterInput>;
+  type: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProduct = {
+  Main: Maybe<SitePluginPluginOptionsSchemasProductMain>;
+};
+
+export type SitePluginPluginOptionsSchemasProductFilterInput = {
+  Main: Maybe<SitePluginPluginOptionsSchemasProductMainFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProductMain = {
+  content: Maybe<SitePluginPluginOptionsSchemasProductMainContent>;
+  stripe_product_id: Maybe<SitePluginPluginOptionsSchemasProductMainStripe_Product_Id>;
+};
+
+export type SitePluginPluginOptionsSchemasProductMainContent = {
+  config: Maybe<SitePluginPluginOptionsSchemasProductMainContentConfig>;
+  type: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasProductMainContentConfig = {
+  label: Maybe<Scalars["String"]>;
+  multi: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasProductMainContentConfigFilterInput =
+  {
+    label: Maybe<StringQueryOperatorInput>;
+    multi: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasProductMainContentFilterInput = {
+  config: Maybe<SitePluginPluginOptionsSchemasProductMainContentConfigFilterInput>;
+  type: Maybe<StringQueryOperatorInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProductMainFilterInput = {
+  content: Maybe<SitePluginPluginOptionsSchemasProductMainContentFilterInput>;
+  stripe_product_id: Maybe<SitePluginPluginOptionsSchemasProductMainStripe_Product_IdFilterInput>;
+};
+
+export type SitePluginPluginOptionsSchemasProductMainStripe_Product_Id = {
+  config: Maybe<SitePluginPluginOptionsSchemasProductMainStripe_Product_IdConfig>;
+  type: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasProductMainStripe_Product_IdConfig = {
+  label: Maybe<Scalars["String"]>;
+};
+
+export type SitePluginPluginOptionsSchemasProductMainStripe_Product_IdConfigFilterInput =
+  {
+    label: Maybe<StringQueryOperatorInput>;
+  };
+
+export type SitePluginPluginOptionsSchemasProductMainStripe_Product_IdFilterInput =
+  {
+    config: Maybe<SitePluginPluginOptionsSchemasProductMainStripe_Product_IdConfigFilterInput>;
+    type: Maybe<StringQueryOperatorInput>;
+  };
 
 export type SitePluginSortInput = {
   fields: Maybe<Array<Maybe<SitePluginFieldsEnum>>>;
@@ -3985,7 +4849,7 @@ export type AllPagesQuery = {
     nodes: Array<{
       _previewable: string;
       url: string | null;
-      data: { title: { text: string | null } | null };
+      data: { title: { text: string | null } | null } | null;
     }>;
   };
 };
@@ -3994,51 +4858,39 @@ type SlicesPageDataBody_PrismicPageDataBodyFeature_Fragment = {
   slice_type: string;
   primary: {
     variant: string | null;
-    intro_text: {
-      text: string | null;
-      richText: import("@prismicio/types").RichTextField;
-    } | null;
+    intro_text: { text: string | null; raw: unknown | null } | null;
     image: { gatsbyImageData: unknown | null; alt: string | null } | null;
-    detail_text: {
-      text: string | null;
-      richText: import("@prismicio/types").RichTextField;
-    } | null;
+    detail_text: { text: string | null; raw: unknown | null } | null;
     button_text: { text: string | null } | null;
     button_link: { url: string | null; target: string | null } | null;
-  };
+  } | null;
 };
 
 type SlicesPageDataBody_PrismicPageDataBodyHeroFeature_Fragment = {
   slice_type: string;
   primary: {
-    text: {
-      text: string | null;
-      richText: import("@prismicio/types").RichTextField;
-    } | null;
+    text: { text: string | null; raw: unknown | null } | null;
     button_text: { text: string | null } | null;
     button_link: { url: string | null; target: string | null } | null;
     image: { gatsbyImageData: unknown | null; alt: string | null } | null;
-  };
+  } | null;
 };
 
 type SlicesPageDataBody_PrismicPageDataBodyInlineNavigation_Fragment = {
   slice_type: string;
-  primary: { leading_text: { text: string | null } | null };
+  primary: { leading_text: { text: string | null } | null } | null;
   items: Array<{
     link_label: { text: string | null } | null;
     link: { url: string | null; target: string | null } | null;
-  }>;
+  } | null> | null;
 };
 
 type SlicesPageDataBody_PrismicPageDataBodyVideo_Fragment = {
   slice_type: string;
   primary: {
-    intro_text: {
-      text: string | null;
-      richText: import("@prismicio/types").RichTextField;
-    } | null;
+    intro_text: { text: string | null; raw: unknown | null } | null;
     video_url: { html: string | null } | null;
-  };
+  } | null;
 };
 
 export type SlicesPageDataBodyFragment =
@@ -4051,51 +4903,39 @@ export type PageDataBodyFeatureFragment = {
   slice_type: string;
   primary: {
     variant: string | null;
-    intro_text: {
-      text: string | null;
-      richText: import("@prismicio/types").RichTextField;
-    } | null;
+    intro_text: { text: string | null; raw: unknown | null } | null;
     image: { gatsbyImageData: unknown | null; alt: string | null } | null;
-    detail_text: {
-      text: string | null;
-      richText: import("@prismicio/types").RichTextField;
-    } | null;
+    detail_text: { text: string | null; raw: unknown | null } | null;
     button_text: { text: string | null } | null;
     button_link: { url: string | null; target: string | null } | null;
-  };
+  } | null;
 };
 
 export type PageDataBodyHeroFeatureFragment = {
   slice_type: string;
   primary: {
-    text: {
-      text: string | null;
-      richText: import("@prismicio/types").RichTextField;
-    } | null;
+    text: { text: string | null; raw: unknown | null } | null;
     button_text: { text: string | null } | null;
     button_link: { url: string | null; target: string | null } | null;
     image: { gatsbyImageData: unknown | null; alt: string | null } | null;
-  };
+  } | null;
 };
 
 export type PageDataBodyInlineNavigationFragment = {
   slice_type: string;
-  primary: { leading_text: { text: string | null } | null };
+  primary: { leading_text: { text: string | null } | null } | null;
   items: Array<{
     link_label: { text: string | null } | null;
     link: { url: string | null; target: string | null } | null;
-  }>;
+  } | null> | null;
 };
 
 export type PageDataBodyVideoFragment = {
   slice_type: string;
   primary: {
-    intro_text: {
-      text: string | null;
-      richText: import("@prismicio/types").RichTextField;
-    } | null;
+    intro_text: { text: string | null; raw: unknown | null } | null;
     video_url: { html: string | null } | null;
-  };
+  } | null;
 };
 
 export type PageTemplateQueryVariables = Exact<{
@@ -4112,56 +4952,45 @@ export type PageTemplateQuery = {
             slice_type: string;
             primary: {
               variant: string | null;
-              intro_text: {
-                text: string | null;
-                richText: import("@prismicio/types").RichTextField;
-              } | null;
+              intro_text: { text: string | null; raw: unknown | null } | null;
               image: {
                 gatsbyImageData: unknown | null;
                 alt: string | null;
               } | null;
-              detail_text: {
-                text: string | null;
-                richText: import("@prismicio/types").RichTextField;
-              } | null;
+              detail_text: { text: string | null; raw: unknown | null } | null;
               button_text: { text: string | null } | null;
               button_link: { url: string | null; target: string | null } | null;
-            };
+            } | null;
           }
         | {
             slice_type: string;
             primary: {
-              text: {
-                text: string | null;
-                richText: import("@prismicio/types").RichTextField;
-              } | null;
+              text: { text: string | null; raw: unknown | null } | null;
               button_text: { text: string | null } | null;
               button_link: { url: string | null; target: string | null } | null;
               image: {
                 gatsbyImageData: unknown | null;
                 alt: string | null;
               } | null;
-            };
+            } | null;
           }
         | {
             slice_type: string;
-            primary: { leading_text: { text: string | null } | null };
+            primary: { leading_text: { text: string | null } | null } | null;
             items: Array<{
               link_label: { text: string | null } | null;
               link: { url: string | null; target: string | null } | null;
-            }>;
+            } | null> | null;
           }
         | {
             slice_type: string;
             primary: {
-              intro_text: {
-                text: string | null;
-                richText: import("@prismicio/types").RichTextField;
-              } | null;
+              intro_text: { text: string | null; raw: unknown | null } | null;
               video_url: { html: string | null } | null;
-            };
+            } | null;
           }
-      >;
-    };
+        | null
+      > | null;
+    } | null;
   } | null;
 };

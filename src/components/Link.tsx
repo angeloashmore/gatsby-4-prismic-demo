@@ -1,17 +1,20 @@
 import * as React from "react";
 import { Link as GatsbyLink } from "gatsby";
-import {
-  PrismicLink,
-  PrismicLinkProps,
-  LinkProps as InternalLinkProps,
-} from "@prismicio/react";
 
-const GatsbyLinkShim = ({ href, ...props }: InternalLinkProps) => (
-  <GatsbyLink to={href} {...props} />
-);
+// TODO
+export type LinkProps = {
+  href: string;
+  target?: string | null;
+  children?: React.ReactNode;
+};
 
-export type LinkProps = PrismicLinkProps;
+// TODO
+export const Link = ({ href, target, ...props }: LinkProps): JSX.Element => {
+  const isExternal = /^https?:\/\//.test(href);
 
-export const Link = (props: LinkProps): JSX.Element => (
-  <PrismicLink internalComponent={GatsbyLinkShim} {...props} />
-);
+  return isExternal ? (
+    <a href={href} target={target || undefined} {...props} />
+  ) : (
+    <GatsbyLink to={href} target={target || undefined} {...props} />
+  );
+};

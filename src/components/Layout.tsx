@@ -47,7 +47,7 @@ export const Layout = ({ children }: LayoutProps) => {
                     <li key={page.url} className="pt-8 pl-8">
                       <Link href={page.url}>
                         <span className="text-gray-600">
-                          {page.data.title?.text}
+                          {page.data?.title?.text}
                         </span>
                       </Link>
                     </li>
