@@ -44,7 +44,7 @@ export const PageDataBodyHeroFeature = ({
           )}
           {slice.primary.button_link?.url && (
             <ButtonLink
-              href={slice.primary.button_link?.url}
+              href={slice.primary.button_link.url}
               target={slice.primary.button_link?.target}
               variant="purple"
             >
@@ -53,13 +53,13 @@ export const PageDataBodyHeroFeature = ({
           )}
         </div>
         <div className="md:col-span-6">
-          {slice.primary.image?.gatsbyImageData && (
+          {slice.primary.image?.gatsbyImageData ? (
             <GatsbyImage
               image={slice.primary.image.gatsbyImageData}
               alt={slice.primary.image?.alt || ""}
               className="w-full max-w-md mx-auto md:max-w-none"
             />
-          )}
+          ) : null}
         </div>
       </div>
     </section>

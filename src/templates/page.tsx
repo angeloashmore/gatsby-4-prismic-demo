@@ -1,6 +1,6 @@
 import * as React from "react";
 import { graphql, PageProps } from "gatsby";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import { SliceZone } from "@prismicio/react";
 import { withPrismicPreview } from "gatsby-plugin-prismic-previews";
 
