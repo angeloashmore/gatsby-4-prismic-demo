@@ -1,25 +1,11 @@
 import { graphql } from "gatsby";
 
-import {
-  PageDataBodyFeature,
-  PageDataBodyFeatureSlice,
-} from "./PageDataBodyFeature";
-import { PageDataBodyVideo, PageDataBodyVideoSlice } from "./PageDataBodyVideo";
-import {
-  PageDataBodyInlineNavigation,
-  PageDataBodyInlineNavigationSlice,
-} from "./PageDataBodyInlineNavigation";
-import {
-  PageDataBodyHeroFeature,
-  PageDataBodyHeroFeatureSlice,
-} from "./PageDataBodyHeroFeature";
+import { PageDataBodyFeatureSlice } from "./PageDataBodyFeature";
+import { PageDataBodyVideoSlice } from "./PageDataBodyVideo";
+import { PageDataBodyInlineNavigationSlice } from "./PageDataBodyInlineNavigation";
+import { PageDataBodyHeroFeatureSlice } from "./PageDataBodyHeroFeature";
 
-export const sliceZoneComponents = {
-  feature: PageDataBodyFeature,
-  video: PageDataBodyVideo,
-  inline_navigation: PageDataBodyInlineNavigation,
-  hero_feature: PageDataBodyHeroFeature,
-};
+// TODO: Add slice map
 
 export type PageDataBodySlice =
   | PageDataBodyFeatureSlice

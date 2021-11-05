@@ -27,7 +27,6 @@ generates:
       scalars:
         Date: string
         JSON: unknown
-        PrismicStructuredText: import('@prismicio/types').RichTextField
 
 # Perform actions before and after `yarn gen` is executed.
 hooks:
