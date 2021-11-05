@@ -3,7 +3,7 @@ import { Link } from "gatsby";
 import { withPrismicUnpublishedPreview } from "gatsby-plugin-prismic-previews";
 
 // TODO
-import { repositoryConfigs } from "../prismicPreviews";
+import { repositoryConfigs } from "../prismicUnpublishedPreviews";
 
 // styles
 const pageStyles = {
